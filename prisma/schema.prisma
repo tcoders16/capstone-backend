@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"            // change to "postgresql" later if you move online
+  url      = env(" ") // e.g., file:./dev.db
+}
+
+model FileObject {
+  id           String   @id @default(cuid())
+  caseId       String
+  originalName String
+  mime         String
+  size         Int
+  storage      StorageType @default(LOCAL)
+  keyOrPath    String
+  demoUrl      String
+  localUrl     String
+  createdAt    DateTime @default(now())
+
+  // denormalized analysis fields
+  category            String?
+  brand               String?
+  model               String?
+  color               String?
+  material            String?
+  shape               String?
+  sizeLabel           String?
+  condition           String?
+  text                String?
+  serialNumber        String?
+  labels              Json?
+  summary             String?
+  keywords            Json?
+  distinctiveFeatures Json?
+  confidence          Float?
+
+  // history + latest pointer
+  analyses         Analysis[]
+  latestAnalysisId String? @unique
+  latestAnalysis   Analysis? @relation("LatestAnalysis", fields: [latestAnalysisId], references: [id]) 
+}
+
+model Analysis {
+  id         String     @id @default(cuid())
+  fileId     String     @unique
+  file       FileObject @relation(fields: [fileId], references: [id])
+
+  // opposite side of the relation for latestAnalysis
+  latestOf   FileObject? @relation("LatestAnalysis")
+
+  type       String
+  version    String?
+  status     String     @default("COMPLETED")
+  confidence Float?
+
+  data       Json
+  createdAt  DateTime   @default(now())
+
+  @@map("analyses")
+}
+
+enum StorageType {
+  LOCAL
+  S3
+}

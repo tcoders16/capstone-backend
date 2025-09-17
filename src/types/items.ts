@@ -68,7 +68,7 @@ export type ItemAttributes = {
 /** ---- Media Asset ---- */
 export type MediaAsset = {
   id: MediaId;
-  itemId: ItemId;
+  fileId: ItemId;
 
   storagePath: string;            // gs://, s3://, or local
   publicUrl?: string;             // CDN or signed URL
@@ -81,7 +81,7 @@ export type MediaAsset = {
 /** ---- Analysis Jobs ---- */
 export type AnalysisJob = {
   id: AnalysisJobId;
-  itemId: ItemId;
+  fileId: ItemId;
   mediaId: MediaId;
 
   stage: AnalysisStage;
@@ -95,7 +95,7 @@ export type AnalysisJob = {
 /** ---- Embedding Payload ---- */
 export type EmbeddingPayload = {
   id: EmbeddingId;
-  itemId: ItemId;
+  fileId: ItemId;
   mediaId: MediaId;
 
   // Which modality produced this embedding

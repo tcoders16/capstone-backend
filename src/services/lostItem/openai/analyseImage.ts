@@ -3,6 +3,7 @@ import { getOpenAI } from "../../../client/openai";
 import { itemsRepo } from "../../../repositories/lostItem/items.repo";
 import type { ItemAttributes } from "../../../types/items";
 
+
 export async function analyzeImage(input: {
   itemId: string;
   imageUrl?: string;            // public URL
@@ -107,3 +108,5 @@ export async function analyzeImage(input: {
 
   return { ok: true as const, itemId, attributes };
 }
+
+
