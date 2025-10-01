@@ -5,7 +5,7 @@
     "rootDir": "src",
 
     /* Language & emit */
-    "target": "ES2022",               // modern JS, matches Node 18+
+    "target": "es2020",               // modern JS, matches Node 18+
     "module": "commonjs",             // compile to CommonJS (no .js suffix headaches)
     "moduleResolution": "Node",       // classic Node resolution
     "resolveJsonModule": true,

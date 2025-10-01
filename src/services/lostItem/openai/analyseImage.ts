@@ -29,10 +29,7 @@ export async function analyzeImage(input: {
         {
           type: "input_text",
           text:
-            (prompt ??
-                        
-                
-                
+            (prompt ??                
                 
                 `You are assisting a transit lost-and-found.
 
